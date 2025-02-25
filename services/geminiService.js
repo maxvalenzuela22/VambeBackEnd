@@ -11,7 +11,7 @@ async function categorizeMessage(message, retries = 3) {
 
         1. **Industria**: [Finanzas, Comercio Electrónico, Salud, Tecnología, Turismo, Eventos, Educación, Logística, Consultoría, ONG, Restaurante, Moda, Otros]
         2. **Motivación para Buscar Vambe**: [Incremento de volumen de consultas, Necesidad de automatizar respuestas repetitivas, Integración con sistemas existentes, Personalización de respuestas, Mejorar la eficiencia operativa, Optimización de tiempos, Reducción de carga operativa]
-        3. **Interés en Funcionalidades Específicas**: [Respuestas personalizadas, Integración con sistemas existentes, Respuestas rápidas, Gestión de consultas complejas, Escalabilidad durante temporadas altas, Soporte en varios idiomas, Automatización de procesos, Actualización en tiempo real, Gestión de reservas]
+        3. **Interés Funcionalidades**: [Respuestas personalizadas, Integración con sistemas existentes, Respuestas rápidas, Gestión de consultas complejas, Escalabilidad durante temporadas altas, Soporte en varios idiomas, Automatización de procesos, Actualización en tiempo real, Gestión de reservas]
         4. **Canal de Descubrimiento de Vambe**: [Conferencia, Webinar, Artículo en línea, Recomendación de un colega, Podcast, Publicación en LinkedIn, Feria empresarial, Recomendación en grupos de emprendedores, Google, No hay información, Otro]
 
         Texto de la consulta:
