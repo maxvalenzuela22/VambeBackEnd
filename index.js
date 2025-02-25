@@ -5,6 +5,7 @@ const db = require('./models');
 const csvRoutes = require('./routes/csvRoutes');
 const informationRoutes = require('./routes/informationRoutes')
 const statisticsRoutes = require('./routes/statisticsRoutes')
+const metricsRoutes = require('./routes/metricsRoutes')
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use('/csv', csvRoutes);
 app.use('/information', informationRoutes)
 app.use('/statistics', statisticsRoutes)
+app.use('/metrics', metricsRoutes)
 
 db.sequelize.sync().then(() => {
   app.listen(port, () => {

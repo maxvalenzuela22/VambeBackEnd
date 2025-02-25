@@ -1,21 +1,21 @@
 const { Information, Subcategory, InformationSubcategory, Category } = require('../models');
 
-exports.Statistics = async (req, res) => {
+exports.getStatistics = async (req, res) => {
     const { name } = req.params;
-    const industry = await Category.findOne({
+    const category = await Category.findOne({
         where: {
             name: name
         }
     });
-    if (!industry) {
-        return res.status(404).json({ message: 'Industry not found' });
+    if (!category) {
+        return res.status(404).json({ message: 'category not found' });
     };
 
-    const industry_id = industry.id;
+    const category_id = category.id;
 
     const Subcategorys = await Subcategory.findAll({
         where: {
-            categoryId: industry_id
+            categoryId: category_id
         }
     });
 
