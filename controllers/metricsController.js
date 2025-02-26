@@ -66,3 +66,34 @@ exports.getSubcategories = async (req, res) => {
         res.status(500).json({ success: false, message: "Error fetching subcategories" });
     }
 }
+
+exports.getInfoById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const information = await Information.findByPk(id, {
+            include: [
+                {
+                    model: Subcategory,
+                    as: "subcategories",
+                    through: { attributes: [] },
+                    include: [
+                        {
+                            model: Category,
+                            as: "category",
+                        }
+                    ]
+                }
+            ]
+        });
+
+        if (!information) {
+            return res.status(404).json({ success: false, message: "Information not found" });
+        }
+
+        res.json({ success: true, data: information });
+    }
+    catch (error) {
+        console.error("Error fetching information:", error);
+        res.status(500).json({ success: false, message: "Error fetching information" });
+    }
+}

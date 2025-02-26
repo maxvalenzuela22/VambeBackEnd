@@ -5,7 +5,7 @@ const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 
 async function categorizeMessage(message, retries = 3) {
     try {
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
         const prompt = `Categoriza la siguiente transcripción de acuerdo a las dimensiones definidas:
 
@@ -48,6 +48,18 @@ async function categorizeMessage(message, retries = 3) {
         return "Error: Servicio no disponible";
     }
 }
+
+async function listAvailableModels() {
+    try {
+        const models = await genAI.ListModels();
+        console.log(models);
+    } catch (error) {
+        console.error("Error obteniendo modelos disponibles:", error);
+    }
+}
+
+listAvailableModels();
+
 
 module.exports = {
     categorizeMessage

@@ -5,7 +5,7 @@ module.exports = {
     const categories = await queryInterface.bulkInsert('Categories', [
       { name: 'Industria', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Motivacion para Buscar Vambe', createdAt: new Date(), updatedAt: new Date() },
-      { name: 'Interes Funcionalidades', createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Interes en Funcionalidades', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Canal de Descubrimiento de Vambe', createdAt: new Date(), updatedAt: new Date() }
     ], { returning: true });
 

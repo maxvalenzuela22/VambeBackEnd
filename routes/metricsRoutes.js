@@ -4,5 +4,6 @@ const metricsController = require('../controllers/metricsController');
 
 router.get('/', metricsController.getMetrics);
 router.get('/subcategories', metricsController.getSubcategories);
+router.get('/data/:id', metricsController.getInfoById);
 
 module.exports = router;
