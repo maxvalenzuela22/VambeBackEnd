@@ -34,7 +34,6 @@ async function categorizeMessage(message, retries = 3) {
         `;
 
         const response = await model.generateContent(prompt);
-        console.log(response?.response?.candidates?.[0]?.content?.parts?.[0]?.text);
         const text = response?.response?.candidates?.[0]?.content?.parts?.[0]?.text;
         return text;
 
@@ -48,17 +47,6 @@ async function categorizeMessage(message, retries = 3) {
         return "Error: Servicio no disponible";
     }
 }
-
-async function listAvailableModels() {
-    try {
-        const models = await genAI.ListModels();
-        console.log(models);
-    } catch (error) {
-        console.error("Error obteniendo modelos disponibles:", error);
-    }
-}
-
-listAvailableModels();
 
 
 module.exports = {

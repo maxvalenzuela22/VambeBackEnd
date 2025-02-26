@@ -18,7 +18,6 @@ const prepareSubcategoryIndex = async () => {
 
 const associateMessageWithHisSubcategories = async (message) => {
     const subcategories = await llmService.categorizeMessage(message);
-    console.log(subcategories);
     const subcategoryNames = subcategories.split(', ');
 
     const fuse = await prepareSubcategoryIndex();
@@ -41,7 +40,6 @@ const associateMessageWithHisSubcategories = async (message) => {
                 }
             });
             if (subcategory) {
-                console.log(subcategory);
                 const id_subcategory = subcategory.id;
 
                 const existingAssociation = await InformationSubcategory.findOne({

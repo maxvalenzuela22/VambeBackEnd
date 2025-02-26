@@ -53,7 +53,6 @@ exports.getMetrics = async (req, res) => {
 
 exports.getSubcategories = async (req, res) => {
     const { categoryName } = req.query;
-    console.log("categoryName", categoryName);
     try {
         const category = await Category.findOne({
             where: { name: categoryName },

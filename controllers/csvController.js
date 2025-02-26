@@ -5,8 +5,6 @@ const csv = require('csv-parser');
 
 exports.postCSV = async (req, res) => {
 
-    console.log('archivo subido:', req.file);
-
     if (!req.file) {
         return res.status(400).json({ message: 'No se recibió un archivo' });
     }
@@ -42,7 +40,6 @@ exports.postCSV = async (req, res) => {
 exports.getCSV = (req, res) => {
     Information.findAll().then((data) => {
         res.status(200).json(data);
-        console.log(data.length);
     }).catch((err) => {
         res.status(500).json({ message: 'Internal server error' });
     }
