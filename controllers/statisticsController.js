@@ -35,107 +35,50 @@ exports.getStatistics = async (req, res) => {
             count: informationSubcategories.length
         });
     }
-    console.log(Statistics);
     res.status(200).json(Statistics);
 };
 
-exports.getSubcategoriesWithMostClosedDeals = async (req, res) => {
-    const { name } = req.params;
-    const category = await Category.findOne({
-        where: {
-            name: name
+const getSubcategoriesWithDeals = async (req, res, dealType) => {
+    try {
+        const { name } = req.params;
+        const category = await Category.findOne({ where: { name } });
+
+        if (!category) {
+            return res.status(404).json({ message: 'Category not found' });
         }
-    });
-    if (!category) {
-        return res.status(404).json({ message: 'category not found' });
-    };
 
-    const category_id = category.id;
+        const subcategories = await Subcategory.findAll({ where: { categoryId: category.id } });
 
-    const Subcategorys = await Subcategory.findAll({
-        where: {
-            categoryId: category_id
-        }
-    });
+        let max = 0;
+        let bestSubcategory = null;
 
-    let max = 0;
-    let subcategoryWithMostClosedDeals = null;
-    for (const subcategory of Subcategorys) {
-        const subcategory_id = subcategory.id;
-
-        const informationSubcategories = await InformationSubcategory.findAll({
-            where: {
-                subcategoryId: subcategory_id
-            }
-        });
-
-        let count = 0;
-        for (const informationSubcategory of informationSubcategories) {
-            const information_id = informationSubcategory.informationId;
-            const information = await Information.findOne({
-                where: {
-                    id: information_id
-                }
+        await Promise.all(subcategories.map(async (subcategory) => {
+            const informationSubcategories = await InformationSubcategory.findAll({
+                where: { subcategoryId: subcategory.id }
             });
-            count += information.closed;
-        }
 
-        if (count > max) {
-            max = count;
-            subcategoryWithMostClosedDeals = subcategory;
-        }
+            const count = (await Promise.all(informationSubcategories.map(async (infoSub) => {
+                const info = await Information.findOne({ where: { id: infoSub.informationId } });
+                return dealType === 'closed' ? info.closed : (info.closed === 0 ? 1 : 0);
+            }))).reduce((sum, value) => sum + value, 0);
+
+            if (count > max) {
+                max = count;
+                bestSubcategory = subcategory;
+            }
+        }));
+
+        res.status(200).json({ subcategory: bestSubcategory, amount: max });
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        res.status(500).json({ message: "Internal server error" });
     }
+};
 
-    res.status(200).json({subcategory: subcategoryWithMostClosedDeals, amount: max});
-}
+exports.getSubcategoriesWithMostClosedDeals = async (req, res) => {
+    return getSubcategoriesWithDeals(req, res, 'closed');
+};
 
 exports.getSubcategoriesWithMostFailedDeals = async (req, res) => {
-    const { name } = req.params;
-    const category = await Category.findOne({
-        where: {
-            name: name
-        }
-    });
-    if (!category) {
-        return res.status(404).json({ message: 'category not found' });
-    };
-
-    const category_id = category.id;
-
-    const Subcategorys = await Subcategory.findAll({
-        where: {
-            categoryId: category_id
-        }
-    });
-
-    let max = 0;
-    let subcategoryWithMostFailedDeals = null;
-
-    for (const subcategory of Subcategorys) {
-        const subcategory_id = subcategory.id;
-
-        const informationSubcategories = await InformationSubcategory.findAll({
-            where: {
-                subcategoryId: subcategory_id
-            }
-        });
-
-        let count = 0;
-        for (const informationSubcategory of informationSubcategories) {
-            const information_id = informationSubcategory.informationId;
-            const information = await Information.findOne({
-                where: {
-                    id: information_id
-                }
-            });
-            count += 1 ? information.closed === 0 : 0;
-        }
-
-        if (count > max) {
-            max = count;
-            subcategoryWithMostFailedDeals = subcategory;
-        }
-    }
-
-    res.status(200).json({subcategory: subcategoryWithMostFailedDeals, amount: max});
-}
+    return getSubcategoriesWithDeals(req, res, 'failed');
+};

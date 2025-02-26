@@ -3,7 +3,7 @@ const { Information, Subcategory, InformationSubcategory, Category } = require("
 
 exports.getMetrics = async (req, res) => {
     try {
-        const { startDate, endDate, seller, closed, category, subcategory } = req.query;
+        const { startDate, endDate, client, seller, closed, category, subcategory } = req.query;
 
         const filters = {};
 
@@ -11,6 +11,10 @@ exports.getMetrics = async (req, res) => {
             filters.date = {};
             if (startDate) filters.date[Op.gte] = new Date(startDate);
             if (endDate) filters.date[Op.lte] = new Date(endDate);
+        }
+
+        if (client) {
+            filters.client = { [Op.iLike]: `%${client}%` };
         }
 
         if (seller) {
@@ -95,5 +99,20 @@ exports.getInfoById = async (req, res) => {
     catch (error) {
         console.error("Error fetching information:", error);
         res.status(500).json({ success: false, message: "Error fetching information" });
+    }
+}
+
+exports.getSellers = async (req, res) => {
+    try {
+        const sellers = await Information.findAll({
+            attributes: ["seller"],
+            group: ["seller"],
+        });
+
+        res.json({ success: true, data: sellers });
+    }
+    catch (error) {
+        console.error("Error fetching sellers:", error);
+        res.status(500).json({ success: false, message: "Error fetching sellers" });
     }
 }
