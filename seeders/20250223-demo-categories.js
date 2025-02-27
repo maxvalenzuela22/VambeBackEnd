@@ -22,6 +22,8 @@ module.exports = {
       { name: 'ONG', categoryId: categories[0].id, createdAt: new Date(), updatedAt: new Date() },
       { name: 'Restaurante', categoryId: categories[0].id, createdAt: new Date(), updatedAt: new Date() },
       { name: 'Moda', categoryId: categories[0].id, createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Deporte', categoryId: categories[0].id, createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Contrucción', categoryId: categories[0].id, createdAt: new Date(), updatedAt: new Date() },
       { name: 'Otros', categoryId: categories[0].id, createdAt: new Date(), updatedAt: new Date() },
 
       { name: 'Incremento de volumen de consultas', categoryId: categories[1].id, createdAt: new Date(), updatedAt: new Date() },
@@ -29,11 +31,11 @@ module.exports = {
       { name: 'Integración con sistemas existentes', categoryId: categories[1].id, createdAt: new Date(), updatedAt: new Date() },
       { name: 'Personalización de respuestas', categoryId: categories[1].id, createdAt: new Date(), updatedAt: new Date() },
       { name: 'Mejorar la eficiencia operativa', categoryId: categories[1].id, createdAt: new Date(), updatedAt: new Date() },
-      { name: 'Optimización de tiempos', categoryId: categories[1].id, createdAt: new Date(), updatedAt: new Date() },
       { name: 'Reducción de carga operativa', categoryId: categories[1].id, createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Otros', categoryId: categories[1].id, createdAt: new Date(), updatedAt: new Date() },
 
       { name: 'Respuestas personalizadas', categoryId: categories[2].id, createdAt: new Date(), updatedAt: new Date() },
-      { name: 'Integración con sistemas existentes', categoryId: categories[2].id, createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Integración con software y sistemas', categoryId: categories[2].id, createdAt: new Date(), updatedAt: new Date() },
       { name: 'Respuestas rápidas', categoryId: categories[2].id, createdAt: new Date(), updatedAt: new Date() },
       { name: 'Gestión de consultas complejas', categoryId: categories[2].id, createdAt: new Date(), updatedAt: new Date() },
       { name: 'Escalabilidad durante temporadas altas', categoryId: categories[2].id, createdAt: new Date(), updatedAt: new Date() },
@@ -41,6 +43,7 @@ module.exports = {
       { name: 'Automatización de procesos', categoryId: categories[2].id, createdAt: new Date(), updatedAt: new Date() },
       { name: 'Actualización en tiempo real', categoryId: categories[2].id, createdAt: new Date(), updatedAt: new Date() },
       { name: 'Gestión de reservas', categoryId: categories[2].id, createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Otros', categoryId: categories[2].id, createdAt: new Date(), updatedAt: new Date() },
 
       { name: 'Conferencia', categoryId: categories[3].id, createdAt: new Date(), updatedAt: new Date() },
       { name: 'Webinar', categoryId: categories[3].id, createdAt: new Date(), updatedAt: new Date() },
@@ -52,7 +55,7 @@ module.exports = {
       { name: 'Recomendación en grupos de emprendedores', categoryId: categories[3].id, createdAt: new Date(), updatedAt: new Date() },
       { name: 'Google', categoryId: categories[3].id, createdAt: new Date(), updatedAt: new Date() },
       { name: 'No hay información', categoryId: categories[3].id, createdAt: new Date(), updatedAt: new Date() },
-      { name: 'Otro', categoryId: categories[3].id, createdAt: new Date(), updatedAt: new Date() }
+      { name: 'Otros', categoryId: categories[3].id, createdAt: new Date(), updatedAt: new Date() }
     ]);
   },
 

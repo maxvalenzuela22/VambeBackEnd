@@ -16,6 +16,4 @@ const upload = multer({ storage: storage });
 
 router.post('/', upload.single('csv'), csvController.postCSV);
 
-router.get('/', csvController.getCSV);
-
 module.exports = router;

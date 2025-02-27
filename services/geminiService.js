@@ -9,10 +9,10 @@ async function categorizeMessage(message, retries = 3) {
 
         const prompt = `Categoriza la siguiente transcripción de acuerdo a las dimensiones definidas:
 
-        1. **Industria**: [Finanzas, Comercio Electrónico, Salud, Tecnología, Turismo, Eventos, Educación, Logística, Consultoría, ONG, Restaurante, Moda, Otros]
-        2. **Motivación para Buscar Vambe**: [Incremento de volumen de consultas, Necesidad de automatizar respuestas repetitivas, Integración con sistemas existentes, Personalización de respuestas, Mejorar la eficiencia operativa, Optimización de tiempos, Reducción de carga operativa]
-        3. **Interés Funcionalidades**: [Respuestas personalizadas, Integración con sistemas existentes, Respuestas rápidas, Gestión de consultas complejas, Escalabilidad durante temporadas altas, Soporte en varios idiomas, Automatización de procesos, Actualización en tiempo real, Gestión de reservas]
-        4. **Canal de Descubrimiento de Vambe**: [Conferencia, Webinar, Artículo en línea, Recomendación de un colega, Podcast, Publicación en LinkedIn, Feria empresarial, Recomendación en grupos de emprendedores, Google, No hay información, Otro]
+        1. **Industria**: [Finanzas, Comercio Electrónico, Salud, Tecnología, Turismo, Eventos, Educación, Logística, Consultoría, ONG, Restaurante, Moda, Deporte, Construcción Otros]
+        2. **Motivación para Buscar Vambe**: [Incremento de volumen de consultas, Necesidad de automatizar respuestas repetitivas, Integración con sistemas existentes, Personalización de respuestas, Mejorar la eficiencia operativa, Reducción de carga operativa, Otros]
+        3. **Interés Funcionalidades**: [Respuestas personalizadas, Integración con software y sistemas, Respuestas rápidas, Gestión de consultas complejas, Escalabilidad durante temporadas altas, Soporte en varios idiomas, Automatización de procesos, Actualización en tiempo real, Gestión de reservas, Otros]
+        4. **Canal de Descubrimiento de Vambe**: [Conferencia, Webinar, Artículo en línea, Recomendación de un colega, Podcast, Publicación en LinkedIn, Feria empresarial, Recomendación en grupos de emprendedores, Google, No hay información, Otros]
 
         Texto de la consulta:
         "${message}"
@@ -21,11 +21,17 @@ async function categorizeMessage(message, retries = 3) {
         1. **Devuelve solo las subcategorías exactas** de la lista, **sin agregar nada más**. Cada categoría debe ser una opción individual, **sin combinar ni modificar** las opciones.
         2. **No uses ninguna palabra que no esté en la lista**. Si el mensaje menciona una palabra que no está en las categorías, **no la uses en la respuesta**. Por ejemplo, si aparece "Clasificación automática de consultas", **no es una opción válida**.
         3. **Las opciones deben estar separadas por comas** y deben ser **exactas**. No hay espacio para variaciones ni combinaciones. Ejemplo incorrecto: "Clasificación automática de consultas" o "Tecnología, Educación". Ejemplo correcto: "Tecnología, Integración con sistemas existentes, Respuestas rápidas, Conferencia".
-        4. Devuelve exactamente **cuatro categorías** para cada mensaje. Si encuentras más o menos, **el modelo está equivocado** y debes ajustarlo.
+        4. Devuelve exactamente **CUATRO SUBCATEGORÍAS** para cada mensaje. Si encuentras más o menos, **el modelo está equivocado** y debes ajustarlo.
         5. Las categorías **no pueden ser de otro tipo**. Si el mensaje menciona algo fuera de las opciones proporcionadas (como "soporte técnico" o "clasificación automática de consultas"), **ignóralo y selecciona solo las opciones válidas** de las listas.
         6. **No uses combinaciones como "Pequeña-Grande"**, esto es incorrecto. Siempre selecciona **solo una opción** por cada categoría, como "Pequeña" o "Grande".
         7. La respuesta debe ser en **el formato de las opciones proporcionadas**, sin explicaciones ni números adicionales.
         8. No debes decir de que categoría es cada opción, solo debes devolver las opciones separadas por comas.
+        9. Dentro de las CUATRO subcategorías cada una debe pertenecer a una categoría diferente.
+       10. Debes identificar bien en la CATEGORÍA: Interés en Funcionalidades, la subcategoría "Integración con software y sistemas",
+        +   asegurándote de que incluya menciones a conexiones con APIs, sincronización con CRMs, ERPs, bases de datos, herramientas empresariales,
+        +   automatización de procesos con otras plataformas, uso de webhooks, conectividad con otros softwares y sistemas internos de las empresas.
+        +   Si el mensaje menciona términos como "API", "CRM", "ERP", "automatización con otras herramientas" o "conexión con mi software", debe ser categorizado aquí.
+	
 
         Ejemplo de respuesta válida:
         "Salud, Personalización de respuestas, Soporte en varios idiomas, Feria Empresarial"
